@@ -59,7 +59,7 @@ class AspectCacheWarmer extends CacheWarmer
      *
      * @return bool true if the warmer is optional, false otherwise
      */
-    public function isOptional()
+    public function isOptional(): bool
     {
         return false;
     }
@@ -69,7 +69,7 @@ class AspectCacheWarmer extends CacheWarmer
      *
      * @param string $cacheDir The cache directory
      */
-    public function warmUp($cacheDir)
+    public function warmUp(string $cacheDir, ?string $buildDir = null): array
     {
         $options     = $this->aspectKernel->getOptions();
         $oldCacheDir = $this->cachePathManager->getCacheDir();
@@ -100,5 +100,7 @@ class AspectCacheWarmer extends CacheWarmer
         restore_error_handler();
         $this->cachePathManager->flushCacheState();
         $this->cachePathManager->setCacheDir($oldCacheDir);
+
+        return [];
     }
 }

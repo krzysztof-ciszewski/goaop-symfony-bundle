@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
      *
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(self::CONFIGURATION_ROOT_NODE);
         $rootNode = $this->getRootNode($treeBuilder);
@@ -88,10 +88,6 @@ class Configuration implements ConfigurationInterface
      */
     private function getRootNode(TreeBuilder $treeBuilder)
     {
-        if (Kernel::VERSION_ID >= 40200) {
-            return $treeBuilder->getRootNode();
-        }
-
-        return $treeBuilder->root(self::CONFIGURATION_ROOT_NODE);
+        return $treeBuilder->getRootNode();
     }
 }
